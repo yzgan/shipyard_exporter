@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     shipyard_exporter (0.1.0)
-      activesupport (~> 6.1)
+      activesupport
 
 GEM
   remote: https://rubygems.org/
