@@ -26,21 +26,23 @@ Or install it yourself as:
 
 
 Enable export feature for model.
-### Include `ShipyardExporter::Exportable` module at model to import features at model file.
+
+Include `ShipyardExporter::Exportable` module at model to import features at model file.
 **app/models/admin.rb**
 ```rb
 include ShipyardExporter::Exportable
 ```
-Following methods will be available
-### export to csv with all attributes defined in column names
+Following methods will be available.
+
+Export to csv with all attributes defined in column names
 ```rb
 Admin.to_csv
 ```
-### export to csv with scoped attributes
+Export to csv with scoped attributes
 ```rb
 Admin.export(format: :csv, attributes: %w[id name])
 ```
-### for customization, define attributes and titles in model and it will overwrite to `#to_csv` method
+For customization, define attributes and titles in model and it will overwrite to `#to_csv` method
 ```rb
 exportable titles: %w[Email UserID Name Phone Wearable Date],
            attributes: %w[user.email user_id user.full_name user.phone wearable wearable_type.name date]
@@ -78,8 +80,10 @@ class Food < ApplicationRecord
 end
 ```
 rails console
-```rb
-Food.to_csv
+```sh
+irb(main):003:0> Movie.to_csv
+Movie: initiating exporting to csv
+"ID,Name,Serving type,Created at\n3,Yogurt,Cup,\"Friday, January 22, 2021 13:00\"\n"
 ```
 ## Development
 
