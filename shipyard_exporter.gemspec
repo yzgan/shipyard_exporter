@@ -6,11 +6,11 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Gan Yi Zhong']
   spec.email         = ['ganyizhong@gmail.com']
 
-  spec.summary       = 'shipyard exporter'
-  spec.description   = 'CSV export feature'
+  spec.summary       = 'all-in-one exporter feature for Rails'
+  spec.description   = 'add CSV export features to rails model'
   spec.homepage      = 'https://github.com/yzgan/shipyard_exporter'
   spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.2.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.4')
 
   spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
 
@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'activesupport'
+  spec.add_dependency 'draper', '~>4.0'
 end
