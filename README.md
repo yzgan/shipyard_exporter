@@ -38,9 +38,9 @@ Export to csv with all attributes defined in column names
 ```rb
 Admin.to_csv
 ```
-Export to csv with scoped attributes
+Export to csv with scoped attributes and row titles
 ```rb
-Admin.export(format: :csv, attributes: %w[id name])
+Admin.export(format: :csv, attributes: %w[id name], row_titles: ['ID', 'Full name'])
 ```
 For customization, define attributes and titles in model and it will overwrite to `#to_csv` method
 ```rb
