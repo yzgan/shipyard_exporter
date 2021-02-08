@@ -2,6 +2,7 @@
 
 All-in-one Exporter feature for Rails app.
 
+![Work in progress](work-in-progress.png)
 
 *\*currently only support CSV export format*
 
@@ -10,7 +11,7 @@ All-in-one Exporter feature for Rails app.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'shipyard_exporter'
+gem 'shipyard_exporter', git: 'git@github.com:yzgan/shipyard_exporter.git'
 ```
 
 And then execute:
