@@ -1,10 +1,10 @@
 # ShipyardExporter
 
-All-in-one Exporter feature for Rails app.
+All-in-one Exporter for Rails app.
 
 ![Work in progress](work-in-progress.png)
 
-*\*currently only support CSV export format*
+*\*currently only support CSV and XLSX export format*
 
 ## Installation
 
@@ -37,6 +37,7 @@ Following methods will be available.
 Export to csv with all attributes defined in column names
 ```rb
 Admin.to_csv
+Admin.to_xlsx
 ```
 Export to csv with scoped attributes and row titles
 ```rb
@@ -84,6 +85,17 @@ rails console
 irb(main):003:0> Movie.to_csv
 Movie: initiating exporting to csv
 "ID,Name,Serving type,Created at\n3,Yogurt,Cup,\"Friday, January 22, 2021 13:00\"\n"
+```
+controller
+```rb
+def index
+  @movies = Movie.all
+  respond_to do |format|
+    format.json { render json: @movies }
+    format.csv { send_data Movie.to_csv, filename: 'movies.csv' }
+    format.xlsx { send_data Movie.to_xlsx, filename: 'movies.xlsx' }
+  end
+end
 ```
 ## Development
 

@@ -28,5 +28,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'activesupport'
+  spec.add_dependency 'caxlsx'
+  spec.add_dependency 'caxlsx_rails'
   spec.add_dependency 'draper', '~>4.0'
 end
