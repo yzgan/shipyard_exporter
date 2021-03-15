@@ -1,10 +1,10 @@
 # ShipyardExporter
 
-All-in-one Exporter feature for Rails app.
+All-in-one Exporter for Rails app.
 
 ![Work in progress](work-in-progress.png)
 
-*\*currently only support CSV export format*
+*\*currently only support CSV and XLSX export format*
 
 ## Installation
 
@@ -18,29 +18,26 @@ And then execute:
 
     $ bundle install
 
-Or install it yourself as:
-
-    $ gem install shipyard_exporter
-
 ## Usage
 
 
 Enable export feature for model.
 
 Include `ShipyardExporter::Exportable` module at model to import features at model file.
+
 **app/models/admin.rb**
 ```rb
 include ShipyardExporter::Exportable
 ```
-Following methods will be available.
-
-Export to csv with all attributes defined in column names
+Following methods will be available. Export to csv or xlsx with all attributes defined in column names
 ```rb
 Admin.to_csv
+Admin.to_xlsx
 ```
-Export to csv with scoped attributes and row titles
+Export to csv or xlsx with scoped attributes and row titles
 ```rb
 Admin.export(format: :csv, attributes: %w[id name], row_titles: ['ID', 'Full name'])
+Admin.export(format: :xlsx, attributes: %w[id name email], row_titles: ['ID', 'Full name', 'Email'])
 ```
 For customization, define attributes and titles in model and it will overwrite to `#to_csv` method
 ```rb
@@ -69,6 +66,7 @@ end
 
 
 ## Full Example
+**app/models/food.rb**
 ```rb
 class Food < ApplicationRecord
   include ShipyardExporter::Exportable
@@ -77,8 +75,26 @@ class Food < ApplicationRecord
 
   exportable titles: ['ID', 'Name', 'Serving type', 'Created at'],
              attributes: %w[id name serving_type.name created_at],
+             decorate: true
 end
 ```
+
+**app/controllers/foods_controller**
+```rb
+class FoodsController < ApplicationController>
+  def index
+    @movies = Food.all
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @movies }
+      format.csv { send_data Food.to_csv, filename: 'foods.csv' }
+      format.xlsx { send_data Food.to_xlsx, filename: 'foods.xlsx' }
+    end
+  end
+end
+```
+
 rails console
 ```sh
 irb(main):003:0> Movie.to_csv
